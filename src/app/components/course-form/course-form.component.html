@@ -1,0 +1,49 @@
+<h2 style="text-align: center; font-weight: bold;" mat-dialog-title>Add Course Details</h2>
+<mat-dialog-content class="mat-typography">
+
+    <div class="row">
+        <div class="col-6">
+            <img style="border-radius: 5px;" width="250px" [src]="imagePreview || '/assets/img/noimage.png'" alt="">
+            <div (click)="filePicker.click()"
+                style="font-size: small;margin-top: 5%; cursor: pointer;color: rgba(0, 0, 0, 0.7);">
+                <img src="/assets/svg/image-svgrepo-com.svg" width="25px" alt=""> Upload image (recommended)
+            </div>
+            <input style="display: none;" type="file" class="form-control" #filePicker
+                (change)="onImageSelected($event)">
+        </div>
+        <div class="col-6">
+            <form [formGroup]="courseForm" class="example-form">
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Name</mat-label>
+                    <input formControlName="name" type="text" matInput placeholder="" value="">
+                    <mat-error
+                        *ngIf="courseForm.controls['name'].invalid && (courseForm.controls['name'].touched)"><span
+                            *ngIf="courseForm.controls['name'].errors.required">Name is
+                            Required</span></mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Duration (month(s))</mat-label>
+                    <input formControlName="duration" type="number" max="36" min="1" matInput placeholder="" value="">
+                    <mat-error
+                        *ngIf="courseForm.controls['duration'].invalid && (courseForm.controls['duration'].touched)"><span
+                            *ngIf="courseForm.controls['duration'].errors.required">Duration is
+                            Required</span></mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Description</mat-label>
+                    <textarea formControlName="description" matInput placeholder="Ex. It makes me feel..."></textarea>
+                    <mat-error
+                        *ngIf="courseForm.controls['description'].invalid && (courseForm.controls['description'].touched)"><span
+                            *ngIf="courseForm.controls['description'].errors.required">Description is
+                            Required</span></mat-error>
+                </mat-form-field>
+            </form>
+        </div>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button [disabled]="courseForm.invalid" (click)="onSave()" cdkFocusInitial
+        color="primary">Save</button>
+</mat-dialog-actions>

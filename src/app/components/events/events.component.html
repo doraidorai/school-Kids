@@ -1,0 +1,18 @@
+<div class="bg">
+    <h2><span class="a">U</span><span class="b">p</span><span class="c">c</span><span class="d">o</span><span class="e">m</span><span class="f">i</span><span class="g">n</span><span class="h">g</span> 
+        <span class="i"> E</span><span class="j">v</span><span class="k">e</span><span class="l">n</span><span class="m">t</span><span class="n">s</span></h2>
+    <div *ngFor="let e of events">
+        <div style="padding-bottom: 5px;">
+            <div style="position: relative;">
+                <img width="100%" [src]="e.img" alt="">
+                <div style="position: absolute; top: 0; left: 0; width: 100%;text-align: center; padding-top: 5%;">
+                    <h1>{{e.title}}</h1><br>
+                    <h1>{{e.country}}</h1><br>
+                    <h6>{{e.subtitle}}</h6><br>                   
+                    <h6>{{e.date}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

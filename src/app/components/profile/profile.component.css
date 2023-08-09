@@ -1,0 +1,26 @@
+.profile-bg{
+    padding: 5% 15%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.avatar{
+    padding: 5%;
+    background-color: white;
+    margin-right: 2%;
+    text-align: center;
+}
+.info{
+    padding: 5%;
+    background-color: white;
+}
+h5{
+    font-weight: bold;
+    font-family:monospace;
+}
+  .mat-form-field {
+    font-size: 14px;
+  }
+  .example-form{
+    display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  }

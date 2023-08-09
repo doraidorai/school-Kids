@@ -1,0 +1,10 @@
+.subscribe-bg{
+    padding: 5% 5%;
+    background-image: url(/assets/img/subscribe.png);
+    height: 50vh;
+    background-size:contain;background-repeat: no-repeat;background-position: center;
+}
+p{
+    font-size: 18px;text-align: left;
+    outline: none;font-style: italic;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

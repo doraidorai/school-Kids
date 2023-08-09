@@ -1,0 +1,159 @@
+.bg{
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-bottom: 5%;
+}
+h2{
+    font-size: 30px;padding: 2% 0; text-align: center;
+  background-color:rgb(68, 47, 255);
+  color: white;
+  }
+  .button-52 {
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button-52:after {
+    content: "";
+    background-color: #ffe54c;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+  }
+  
+  .button-52:hover:after {
+    top: 0px;
+    left: 0px;
+  }
+  
+  @media (min-width: 768px) {
+    .button-52 {
+      padding: 13px 50px 13px;
+    }
+  }
+
+  .button-51 {
+    background-color: transparent;
+    border: 1px solid #266DB6;
+    box-sizing: border-box;
+    color: #00132C;
+    font-family: "Avenir Next LT W01 Bold",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    padding: 16px 23px;
+    position: relative;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button-51:hover,
+  .button-51:active {
+    outline: 0;
+  }
+  
+  .button-51:hover {
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .button-51:before {
+    background-color: #D5EDF6;
+    content: "";
+    height: calc(100% + 3px);
+    position: absolute;
+    right: -7px;
+    top: -9px;
+    transition: background-color 300ms ease-in;
+    width: 100%;
+    z-index: -1;
+  }
+  
+  .button-51:hover:before {
+    background-color: #6DCFF6;
+  }
+  
+  @media (min-width: 768px) {
+    .button-51 {
+      padding: 16px 32px;
+    }
+  }
+
+.example-full-width{
+  width: 100%;
+}
+.example-full-width2{
+  width: 20%;
+}
+.example-full-width-course{
+  width: 100%;font-size: 14px;
+}
+.custom-modal .modal-dialog {
+  max-width: 300px;
+}.modal-footer {
+  border-top: none;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+.View-modal .modal-dialog {
+  max-width: 600px;
+}
+/* .custom-modal-course .modal-dialog{
+  max-width: 900px;
+} */
+/* .image-container {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  display: flex;
+} */ .courses { 
+  display: inline-block;
+  width: 250px; height:166.66px;
+  margin-right: 20px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;border-radius:5px;
+}
+.course-details{
+  color: gray;
+  font-weight: bold;
+  font-size: small;
+}
+p{
+  font-weight: bold;
+  font-size: small;margin-top: 5%;
+}
+.image-container {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.1);
+}
+
+.image-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.image-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.image-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}

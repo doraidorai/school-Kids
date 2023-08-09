@@ -1,0 +1,17 @@
+.teacher-bg{
+    background-image: url(/assets/img/teacher-signup.jpg);
+    height: 100vh;background-size: contain;background-repeat: no-repeat;background-position: center;
+}
+.container{
+    padding-top: 5%;
+    padding-bottom: 5%; padding-left: 20%;
+}
+.example-full-width {
+    width: 45%;color: rgba(255, 255, 255, 0.8);
+  }
+  .mat-form-field {
+    font-size: 14px; margin-right: 5%;
+  }
+  mat-label{
+    color: rgba(255, 255, 255, 0.8);
+  }

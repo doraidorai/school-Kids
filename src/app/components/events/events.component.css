@@ -1,0 +1,37 @@
+h2{
+    font-size: 60px;
+    font-style: italic;
+  }
+  .bg{
+    padding-top: 5%;
+    padding-left: 15%;
+    padding-right: 15%;
+    background-color: whitesmoke;
+  }
+h1{
+    font-weight: bold;font-size: 50px;font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background: linear-gradient(to top, rgb(255, 0, 191), white,white);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+h6{
+    font-weight: bold;font-size: 20px;font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background: linear-gradient(to top,yellow, white,white);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.a{color: yellowgreen; -webkit-text-stroke: 1px blueviolet;}
+.b{color: aqua; -webkit-text-stroke: 1px yellowgreen;}
+.c{color: blueviolet; -webkit-text-stroke: 1px chartreuse;}
+.d{color: blue; -webkit-text-stroke: 1px blue;}
+.e{color: brown; -webkit-text-stroke: 1px chartreuse;}
+.f{color: burlywood; -webkit-text-stroke: 1px blue;}
+.g{color: cadetblue; -webkit-text-stroke: 1px chocolate;}
+.h{color: chartreuse; -webkit-text-stroke: 1px brown;}
+.i{color: chocolate; -webkit-text-stroke: 1px blue;}
+.j{color: coral; -webkit-text-stroke: 1px chocolate;}
+.k{color: cornflowerblue; -webkit-text-stroke: 1px blue;}
+.l{color: crimson; -webkit-text-stroke: 1px coral;}
+.m{color: cyan; -webkit-text-stroke: 1px chartreuse;}
+.n{color: teal; -webkit-text-stroke: 1px blue;}

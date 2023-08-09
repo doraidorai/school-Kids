@@ -1,0 +1,76 @@
+<div class="products-bg">
+  <h2>Our Teachers</h2>
+  <mat-form-field appearance="fill" style="width: 30%;">
+    <mat-label>Search by Speciality</mat-label>
+    <input [(ngModel)]="searchText" type="" matInput placeholder="" value="">
+  </mat-form-field>
+  <!-- <div style="font-size: small;color: gray;">Click into img to view more details</div> -->
+  <mat-grid-list cols="3" rowHeight="3:2" gutterSize="20">
+    <mat-grid-tile
+      style="background-image: url(/assets/img/teachers-bg.jpg); text-align: center;background-size: cover;color: white;text-shadow: 2px 2px 5px black;background-position: center;">
+      <h6 style="background-color: rgba(0, 0, 0, 0.25);padding: 100% 0;">Welcome to our Super Teacher community!  Let
+        knowledge empower your journey. <br>
+        <span style="font-size: small;color: white;">Click into img to view more details</span>
+      </h6>
+        
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let teacher of teachers | filter: searchText">
+      <img title="click to View details" [src]="teacher.avatar" alt="" data-bs-toggle="modal" data-bs-target="#exampleModalViewTeacher"
+        (click)="selectedTeacher = teacher">
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<div class="modal fade View-modal" id="exampleModalViewTeacher" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" *ngIf="selectedTeacher">
+      <div style="background-image: url(/assets/img/teacher-view-header.png);" class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="margin-left: 10%;">{{selectedTeacher.firstName |
+          uppercase}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <img style="border-radius: 5px;" width="200px" [src]="selectedTeacher.avatar" alt="">
+            </div>
+            <div class="col">
+              <div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">First Name:</span>
+                  <span>{{selectedTeacher.firstName}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Last Name:</span>
+                  <span>{{selectedTeacher.lastName}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Email:</span>
+                  <span>{{selectedTeacher.email}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Tel:</span>
+                  <span>{{selectedTeacher.tel}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Address:</span>
+                  <span>{{selectedTeacher.address}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Speciality:</span>
+                  <span>{{selectedTeacher.speciality}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">CV:</span>
+                  <span style="font-size: small;"><a *ngIf="selectedTeacher.cv" [href]="selectedTeacher.cv"
+                      target="_blank">View CV</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

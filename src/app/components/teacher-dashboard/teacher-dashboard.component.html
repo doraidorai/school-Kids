@@ -1,0 +1,329 @@
+<div class="bg">
+  <h2>Dashboard</h2>
+  <div style="text-align: right;font-size: small;">{{actualDate| date:'short'}}</div>
+  <button class="button-52" role="button" (click)="openDialog()">+ Add Course</button>
+  <h5 style="margin: 5% 0; font-weight: bold; color: gray;">List of Courses<br><span
+      style="font-size: small; font-weight: lighter;">You can Add Note and Rating to Students in selected Course</span>
+  </h5>
+  <div *ngIf="courses.length == 0">
+    <div class="text-center" style="color: red;">Nothing to display</div>
+  </div>
+  <div class="image-container">
+    <div *ngFor="let course of courses">
+      <img (click)="selectedCourse = course" data-bs-toggle="modal" data-bs-target="#exampleModalCourse" class="courses"
+        [src]="course.img || '/assets/img/noimage.png'" alt="Image 1">
+      <p><span class="course-details">Title:</span> {{course.name}}<br><span class="course-details">Duration:</span>
+        {{course.duration}} <span class="course-details">Month(s)</span><br><span
+          class="course-details">Description:</span> {{course.description}}</p>
+    </div>
+  </div>
+  <h5 style="margin: 5% 0; font-weight: bold; color: gray;">List of All Students</h5>
+  <div style="font-size: small;" class="container">
+    <div *ngIf="students.length == 0">
+      <div class="text-center" style="color: red;">Nothing to display</div>
+    </div>
+    <div class="row">
+      <div class="col-6" *ngFor="let student of students" style="background-color:rgba(0, 0, 0, 0.1);padding: 2%;">
+        <div class="row">
+          <div class="col">
+            <img style="border-radius: 5px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);" width="200px"
+              [src]="student.avatar" alt="">
+          </div>
+          <div class="col">
+            <div><span class="course-details">First Name:</span> {{student.firstName}}</div>
+            <div><span class="course-details">Last Name:</span> {{student.lastName}}</div>
+            <div><a data-bs-toggle="modal" data-bs-target="#exampleModalViewStudent" (click)="selectedStudent = student"
+                href="">View details</a></div>
+            <!-- <div style="margin-top: 15px;"><button (click)="selectedStudent = student" data-bs-toggle="modal"
+                data-bs-target="#exampleModal" mat-raised-button>Add Note</button></div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="modal fade custom-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" *ngIf="selectedStudent">
+      <div style="background-color: rgba(0, 0, 0, 0.1);" class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{selectedStudent.firstName | uppercase}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="studentNoteForm" class="example-form">
+          <mat-form-field class="example-full-width2">
+            <mat-label>Note</mat-label>
+            <input formControlName="note" matInput #postalCode maxlength="2" placeholder="Ex. 10" value="">
+            <mat-hint>{{postalCode.value.length}} / 2</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Rating</mat-label>
+            <input formControlName="rating" matInput #message maxlength="20" placeholder="Ex. Exellent people...">
+            <mat-hint><strong>Don't disclose personal info</strong> </mat-hint>
+            <mat-hint>{{message.value.length}} / 20</mat-hint>
+          </mat-form-field>
+          <input type="hidden" formControlName="id" [ngModel]="selectedStudent._id">
+        </form>
+      </div>
+      <div class="modal-footer justify-content-center">
+
+        <button (click)="saveStudentNote()" data-bs-dismiss="modal" mat-raised-button color="primary">Save</button>
+
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="modal fade View-modal" id="exampleModalViewStudent" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" *ngIf="selectedStudent">
+      <div style="background-image: url(/assets/img/student-view-header.png);" class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="margin-left: 10%;">{{selectedStudent.firstName |
+          uppercase}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-5">
+              <img style="border-radius: 5px;" width="200px" [src]="selectedStudent.avatar" alt="">
+            </div>
+            <div class="col">
+              <div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">First Name:</span>
+                  <span>{{selectedStudent.firstName}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Last Name:</span>
+                  <span>{{selectedStudent.lastName}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Email:</span>
+                  <span>{{selectedStudent.email}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Tel:</span>
+                  <span>{{selectedStudent.tel}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Address:</span>
+                  <span>{{selectedStudent.address}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade custom-modal-course" id="exampleModalCourse" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+    <div class="modal-content" *ngIf="selectedCourse">
+      <div class="modal-header" style="background-color: rgba(137, 43, 226, 0.5);color: white;">
+        <h5 style="margin-left: 10%;">Edit / delete Course</h5>
+        <h5 style="margin-left: 40%;">Assigned Students</h5>       
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div style="text-align: center;" class="col-4">
+
+            <div>
+              <form [formGroup]="courseEditForm" class="example-form">
+                <mat-form-field appearance="fill" class="example-full-width-course">
+                  <mat-label>{{selectedCourse.name}}</mat-label>
+                  <input formControlName="name" [(ngModel)]="name" type="text" matInput placeholder="" value="">
+                  <mat-error
+                    *ngIf="courseEditForm.controls['name'].invalid && (courseEditForm.controls['name'].touched)"><span
+                      *ngIf="courseEditForm.controls['name'].errors.required">Name is
+                      Required</span></mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width-course">
+                  <mat-label>{{selectedCourse.duration}} month(s)</mat-label>
+                  <input formControlName="duration" [(ngModel)]="duration" type="number" max="36" min="1" matInput
+                    placeholder="" value="">
+                  <mat-error
+                    *ngIf="courseEditForm.controls['duration'].invalid && (courseEditForm.controls['duration'].touched)"><span
+                      *ngIf="courseEditForm.controls['duration'].errors.required">Duration is
+                      Required</span></mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width-course">
+                  <mat-label>{{selectedCourse.description}}</mat-label>
+                  <textarea formControlName="description" [(ngModel)]="description" matInput
+                    placeholder="Ex. It makes me feel..."></textarea>
+                  <mat-error
+                    *ngIf="courseEditForm.controls['description'].invalid && (courseEditForm.controls['description'].touched)"><span
+                      *ngIf="courseEditForm.controls['description'].errors.required">Description is
+                      Required</span></mat-error>
+                </mat-form-field>
+                <input type="hidden" formControlName="id" [ngModel]="selectedCourse._id">
+              </form>
+            </div>
+            <div style="margin-top: 5%;">
+              <img style="border-radius: 5px;" width="200px" [src]="imagePreview || selectedCourse.img" alt="">
+              <div (click)="filePicker.click()"
+                style="font-size: small;margin-top: 5%; cursor: pointer;color: rgba(0, 0, 0, 0.7);">
+                <img src="/assets/svg/image-svgrepo-com.svg" width="25px" alt=""> Upload image (recommended)
+              </div>
+              <input style="display: none;" type="file" class="form-control" #filePicker
+                (change)="onImageSelected($event)">
+            </div>
+
+            <div style="margin-top: 5%;">
+              <button (click)="editCourse()" style="margin-right: 10px;" data-bs-dismiss="modal" mat-raised-button
+                color="primary"
+                [disabled]="courseEditForm.invalid || !name && !duration && !description && !isImageSelected">Save
+                changes</button>
+              <button (click)="deleteCourse(selectedCourse._id)" data-bs-dismiss="modal" mat-raised-button
+                color="warn">Delete
+                Course</button>
+            </div>
+          </div>
+          <div class="col-8">
+            <div class="container" style="height: 75vh;overflow-y: auto;">
+              <table class="table table-bordered border-primary table-hover" style="text-align: center;">
+                <thead>
+                  <tr>
+                    <th class="col-1">Avatar</th>
+                    <th class="col-3">Name</th>
+                    <th class="col-3">Notes & Rating</th>
+                    <th class="col-3">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let i of assignInfo">
+                    <ng-container *ngIf="i.courseId === selectedCourse._id">
+                      <ng-container *ngFor="let student of students">
+                        <ng-container *ngIf="i.studentsId.includes(student._id)">
+                          <tr>
+                            <td><img style="border-radius: 50%;" [src]="student.avatar" width="70px" alt=""></td>
+                            <td> {{student.firstName}}<br>{{student.lastName}}</td>
+                            <td>
+                              <ng-container *ngFor="let note of notes">
+                                <ng-container *ngIf="note.courseId == selectedCourse._id">
+                                  <ng-container *ngIf="note.studentId == student._id">
+                                    <span [ngStyle]="{'color': noteColor(note.note)}"
+                                      style="font-weight: bold;">{{note.note}}</span> {{note.rating}}<br>
+                                  </ng-container>
+                                </ng-container>
+                              </ng-container>
+                            </td>
+                            <td>
+                              <mat-expansion-panel #panel hideToggle>
+                                <mat-expansion-panel-header>
+                                  Add Note
+                                </mat-expansion-panel-header>
+                                <form [formGroup]="studentNoteForm" class="example-form">
+                                  <mat-form-field style="width: 100%;">
+                                    <mat-label>Note</mat-label>
+                                    <input formControlName="note" matInput #postalCode maxlength="5"
+                                      placeholder="Ex. 10" value="">
+                                    <mat-hint>{{postalCode.value.length}} / 5</mat-hint>
+                                  </mat-form-field>
+                                  <mat-form-field style="width: 100%;">
+                                    <mat-label>Rating</mat-label>
+                                    <input formControlName="rating" matInput #message maxlength="20"
+                                      placeholder="Ex. Exellent people...">
+                                    <mat-hint>{{message.value.length}} / 20</mat-hint>
+                                  </mat-form-field>
+                                  <input type="hidden" formControlName="courseId" [ngModel]="selectedCourse._id">
+                                </form>
+                                <button mat-raised-button color="primary"
+                                  (click)="saveStudentNote(student._id) ; panel.close()">Save</button>
+                              </mat-expansion-panel>
+                            </td>
+                          </tr>
+                        </ng-container>
+                      </ng-container>
+                    </ng-container>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+
+          <!-- <div class="col-6">
+            <h6 style="font-family: monospace; text-align: center;">List Assigned Students</h6>
+            <div style="font-size: small; font-weight: bold;background-color: rgba(0, 0, 0, 0.5);color: white;">
+              <span style="margin-right: 20px;margin-left: 20px;">Avatar</span>
+              <span style="margin-right: 50px;">Name</span>
+              <span style="margin-right: 70px;">Notes</span>
+              <span>Actions</span>
+            </div>
+            <div class="container" style="height: 300px;overflow-y: auto;">
+              <div *ngFor="let i of assignInfo">
+                <div *ngIf="i.courseId == selectedCourse._id">
+                  <div *ngFor="let student of students">
+                    <div *ngIf="i.studentsId.includes(student._id)">
+                      <div class="row" style="margin-bottom: 5px;">
+                        <div class="col-2">
+                          <img [src]="student.avatar" width="50px" alt="">
+                        </div>
+                        <div style="font-size: small;" class="col-3">
+                          {{student.firstName}}<br>{{student.lastName}}
+                        </div>
+                        <div style="font-size: small;" class="col-2">
+                          <div *ngFor="let note of notes">
+                            <div *ngIf="note.courseId == selectedCourse._id">
+                              <div *ngIf="note.studentId == student._id" style="background-color:rgba(0, 0, 0, 0.1);padding: 10px;">
+                                <span [ngStyle]="{'color': noteColor(note.note)}" style="font-weight: bold;">{{note.note}}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-5">
+                          <mat-expansion-panel #panel hideToggle>
+                            <mat-expansion-panel-header>
+                              Add Note
+                            </mat-expansion-panel-header>
+
+                            <form [formGroup]="studentNoteForm" class="example-form">
+                              <mat-form-field style="width: 100%;">
+                                <mat-label>Note</mat-label>
+                                <input formControlName="note" matInput #postalCode maxlength="2" placeholder="Ex. 10"
+                                  value="">
+                                <mat-hint>{{postalCode.value.length}} / 2</mat-hint>
+                              </mat-form-field>
+                              <mat-form-field style="width: 100%;">
+                                <mat-label>Rating</mat-label>
+                                <input formControlName="rating" matInput #message maxlength="20"
+                                  placeholder="Ex. Exellent people...">
+                                <mat-hint>{{message.value.length}} / 20</mat-hint>
+                              </mat-form-field>
+                              <input type="hidden" formControlName="courseId" [ngModel]="selectedCourse._id">
+                            </form>
+
+                            <button mat-raised-button color="primary"
+                              (click)="saveStudentNote(student._id) ; panel.close()">Save</button>
+                          </mat-expansion-panel>
+                        </div>
+                        <hr style="margin-top: 10px;">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+        </div>
+      </div>
+      <!-- <div class="modal-footer justify-content-start">
+        <button (click)="editCourse()" style="margin-right: 10px;" data-bs-dismiss="modal" mat-raised-button
+          color="primary"
+          [disabled]="courseEditForm.invalid || !name && !duration && !description && !isImageSelected">Save
+          changes</button>
+        <button (click)="deleteCourse(selectedCourse._id)" data-bs-dismiss="modal" mat-raised-button color="warn">Delete
+          Course</button>
+      </div> -->
+    </div>
+  </div>
+</div>

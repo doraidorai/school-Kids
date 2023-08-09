@@ -1,0 +1,22 @@
+.modal-footer {
+  border-top: none;
+}
+.bg{
+  padding: 5% 15%;
+}
+.modal-header {
+  border-bottom: none;
+}.mat-form-field {
+  font-size: 14px;
+}
+.View-modal .modal-dialog {
+  max-width: 600px;
+}
+.course-details{
+  color: gray;
+  font-weight: bold;
+  font-size: small;
+}
+.View-modal-course .modal-dialog {
+  max-width: 1000px;
+}

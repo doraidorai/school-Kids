@@ -1,0 +1,113 @@
+<div class="teacher-bg">
+    <div class="container">
+        <div class="row">
+            <div style="color: rgba(255, 255, 255, 0.8);" class="col">
+                <h3 style="font-weight: bold;margin-bottom: 5%;">Welcome Teacher!</h3>
+                <p style="font-size: small;">*After Signup, you need to Wait, until get Accepted be C.O. of our
+                    University,<br> so you can login and Join Us.<br>
+                    <span style="color: rgba(255, 255, 255, 0.4);">For more details:
+                        +1 418-683-1953</span>
+                </p>
+                <input style="visibility: hidden;" type="file" accept=".pdf" #filePickerCV
+                    (change)="handleCVUpload($event)" />
+                <input style="visibility: hidden;" type="file" #filePickerImg (change)="handleImageUpload($event)" />
+            </div>
+            <div class="col">
+                <form [formGroup]="signupTeacherForm" class="example-form">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>First Name</mat-label>
+                        <input formControlName="firstName" type="text" matInput placeholder="" value="">
+                        <mat-error
+                            *ngIf="signupTeacherForm.controls['firstName'].invalid && (signupTeacherForm.controls['firstName'].touched)"><span
+                                *ngIf="signupTeacherForm.controls['firstName'].errors.required">First name is
+                                Required</span></mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Last Name</mat-label>
+                        <input formControlName="lastName" type="text" matInput placeholder="" value="">
+                        <mat-error
+                            *ngIf="signupTeacherForm.controls['lastName'].invalid && (signupTeacherForm.controls['lastName'].touched)"><span
+                                *ngIf="signupTeacherForm.controls['lastName'].errors.required">Last
+                                name is
+                                Required</span></mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Email</mat-label>
+                        <input formControlName="email" type="email" matInput placeholder="" value="">
+                        <mat-error
+                            *ngIf="signupTeacherForm.controls['email'].invalid && (signupTeacherForm.controls['email'].touched || signupTeacherForm.controls['email'].dirty)"><span
+                                *ngIf="signupTeacherForm.controls['email'].errors.required">email
+                                is
+                                Required</span><span *ngIf="signupTeacherForm.controls['email'].errors.email">invalid
+                                email
+                                format</span></mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Phone number</mat-label>
+                        <input formControlName="tel" type="tel" matInput placeholder="" value="">
+                        <mat-error
+                            *ngIf="signupTeacherForm.controls['tel'].invalid && (signupTeacherForm.controls['tel'].touched || signupTeacherForm.controls['tel'].dirty)"><span
+                                *ngIf="signupTeacherForm.controls['tel'].errors.required">Phone is
+                                Required</span><span *ngIf="signupTeacherForm.controls['tel'].errors.minlength">Phone at
+                                least 8
+                                ch.</span></mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Address</mat-label>
+                        <input formControlName="address" type="text" matInput placeholder="" value="">
+                        <mat-error
+                            *ngIf="signupTeacherForm.controls['address'].invalid && (signupTeacherForm.controls['address'].touched)"><span
+                                *ngIf="signupTeacherForm.controls['address'].errors.required">address is
+                                Required</span></mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Speciality</mat-label>
+                        <input formControlName="speciality" type="text" matInput placeholder="" value="">
+                        <mat-error
+                            *ngIf="signupTeacherForm.controls['speciality'].invalid && (signupTeacherForm.controls['speciality'].touched)"><span
+                                *ngIf="signupTeacherForm.controls['speciality'].errors.required">speciality is
+                                Required</span></mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Enter password</mat-label>
+                        <input formControlName="pwd" matInput [type]="hide ? 'password' : 'text'">
+                        <mat-error
+                            *ngIf="signupTeacherForm.controls['pwd'].invalid && (signupTeacherForm.controls['pwd'].touched || signupTeacherForm.controls['pwd'].dirty)"><span
+                                *ngIf="signupTeacherForm.controls['pwd'].errors.required">Password
+                                is
+                                Required</span><span *ngIf="signupTeacherForm.controls['pwd'].errors.minlength">Password
+                                at least 6
+                                ch.</span></mat-error>
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                    <div><a (click)="filePickerCV.click()"
+                            style="font-size: small;cursor: pointer;color: rgba(255, 255, 255, 0.8);"><img
+                                src="/assets/svg/file-svgrepo-com.svg" width="25px" alt=""> Upload CV (recommended)</a>
+                    </div>
+
+                    <div style="margin-bottom: 5%;color: rgba(255, 255, 255, 0.5);font-size: small;">{{ selectedCV ?
+                        selectedCV.name : '' }}</div>
+
+                    <div style="margin-bottom: 2%;"><a (click)="filePickerImg.click()"
+                            style="font-size: small;cursor: pointer;color: rgba(255, 255, 255, 0.8);"><img
+                                src="/assets/svg/image-svgrepo-com.svg" width="25px" alt=""> Upload picture
+                            (optional)</a></div>
+
+                    <div style="margin-bottom: 5%;"> <img [src]="imageUrl" alt="" width="100px"></div>
+                </form>
+
+                <button (click)="signupTeacher()" [disabled]="signupTeacherForm.invalid"
+                    mat-raised-button>Signup</button>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

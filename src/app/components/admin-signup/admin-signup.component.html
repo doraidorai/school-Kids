@@ -1,0 +1,63 @@
+<div *ngIf="!isPuzzleCorrect" style="padding: 5% 0;text-align: center;background-image: url(/assets/img/puzzle1.png);height: 70vh;background-size: contain;background-position: center;">
+  <h1 style="font-size: 50px;">P U Z Z L E</h1>
+  <div style="display: flex;justify-content: center;">
+      <button
+          style="margin: 3.75% 0;border-width: 0;font-size: 30px;color: rgb(0, 0, 0); background-color: rgba(247, 0, 255, 0.5);margin-right: 20px; box-shadow: 2px 2px 5px gray;"
+          *ngFor="let word of words" (click)="handleClick(word)">{{ word }}</button>
+  </div>
+  <div style="justify-content: center;display: flex; font-size: 30px; color: white;margin-top: 20px;">
+      <p style="background-color: rgba(0, 0, 0, 0.5);padding: 0 10px;">{{ selectedWords.join(' ') }}</p>
+  </div>
+</div>
+<div *ngIf="isPuzzleCorrect" style="text-align: center;padding: 5% 0;">
+  <p style="font-size: small;font-style: italic;"><img src="/assets/svg/warning-202.svg" width="20px" alt=""> Admin
+    Signup page Only available One Time<br>*You can't Recover Account with Email.</p>
+
+
+  <form [formGroup]="signupForm" class="example-form container col-3">
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>First Name</mat-label>
+      <input formControlName="firstName" type="text" matInput placeholder="" value="">
+      <mat-error *ngIf="signupForm.controls['firstName'].invalid && (signupForm.controls['firstName'].touched)"><span *ngIf="signupForm.controls['firstName'].errors.required">First name is Required</span></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Last Name</mat-label>
+      <input formControlName="lastName" type="text" matInput placeholder="" value="">
+      <mat-error *ngIf="signupForm.controls['lastName'].invalid && (signupForm.controls['lastName'].touched)"><span *ngIf="signupForm.controls['lastName'].errors.required">Last name is Required</span></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" type="email" matInput placeholder="" value="">
+      <mat-error *ngIf="signupForm.controls['email'].invalid && (signupForm.controls['email'].touched || signupForm.controls['email'].dirty)"><span *ngIf="signupForm.controls['email'].errors.required">email is Required</span><span *ngIf="signupForm.controls['email'].errors.email">invalid email format</span></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Phone number</mat-label>
+      <input formControlName="tel" type="tel" matInput placeholder="" value="">
+      <mat-error *ngIf="signupForm.controls['tel'].invalid && (signupForm.controls['tel'].touched || signupForm.controls['tel'].dirty)"><span *ngIf="signupForm.controls['tel'].errors.required">Phone is Required</span><span *ngIf="signupForm.controls['tel'].errors.minlength">Phone at least 8 ch.</span></mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Enter password</mat-label>
+      <input formControlName="pwd" matInput [type]="hide ? 'password' : 'text'">
+      <mat-error *ngIf="signupForm.controls['pwd'].invalid && (signupForm.controls['pwd'].touched || signupForm.controls['pwd'].dirty)"><span *ngIf="signupForm.controls['pwd'].errors.required">Password is Required</span><span *ngIf="signupForm.controls['pwd'].errors.minlength">Password at least 6 ch.</span></mat-error>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Confirm password</mat-label>
+      <input formControlName="confirmPwd" matInput [type]="hide ? 'password' : 'text'">
+      <mat-error *ngIf="signupForm.controls['confirmPwd'].invalid && (signupForm.controls['confirmPwd'].touched || signupForm.controls['confirmPwd'].dirty)"><span *ngIf="signupForm.controls['confirmPwd'].errors.required">Password is Required</span><span *ngIf="signupForm.controls['confirmPwd'].errors.pwdMisMatch">Password mis match</span></mat-error>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+  </form>
+
+
+  <button (click)="signup()" [disabled]="signupForm.invalid" mat-raised-button color="warn">Signup</button>
+
+</div>

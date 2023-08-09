@@ -1,0 +1,21 @@
+<mat-card style="margin-bottom: 8%;" class="example-card">
+    <p><span style="color: rgba(128, 128, 128, 0.7);font-weight: bold;">Title:</span> <span style="font-weight: bold;font-size: large;"> {{y.name}}</span></p>
+    <p style="font-size: small;color: rgba(128, 128, 128, 0.7);font-weight: bold;">Duration:<span
+            style="font-size: small;color: black;font-weight: normal;"> {{y.duration}} </span>month(s)</p>
+    <img [src]="y.img" width="260px" height="150px" alt="Photo of a Course">
+    <mat-card-content>
+        <p><span style="color: rgba(128, 128, 128, 0.7);font-weight: bold;">Description:</span> {{y.description}}</p>
+    </mat-card-content>
+    <div *ngFor="let note of notes">
+        <div *ngIf="note.courseId == y._id">
+            <div style="background-color: rgba(128, 128, 128, 0.1);padding: 2%;margin-bottom: 2%;" *ngIf="userId == note.studentId">
+                <span style="font-size: small; color: rgba(128, 128, 128, 0.7);font-weight: bold;">Note:</span><span style="font-weight: bold;" [ngStyle]="{'color': noteColor(note.note)}"> {{note.note}}</span> <br>
+                <span style="font-size: small;color: rgba(128, 128, 128, 0.7);font-weight: bold;">Rating:</span> {{note.rating}}
+            </div>
+
+        </div>
+    </div>
+    <!-- <mat-card-actions>
+        <button mat-raised-button color="primary">View Note</button>
+    </mat-card-actions> -->
+</mat-card>

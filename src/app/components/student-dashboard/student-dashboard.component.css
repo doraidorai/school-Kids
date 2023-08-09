@@ -1,0 +1,13 @@
+h2{
+    font-size: 60px;
+    color: transparent;
+    font-style: italic;
+  -webkit-text-stroke: 1px #000;
+    background: linear-gradient(45deg, #00000000, #00000080, #000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .bg{
+    padding: 5% 15%;
+    background-color: rgba(0, 0, 0, 0.1);
+  }

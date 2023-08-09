@@ -1,0 +1,72 @@
+<footer style="background-color: whitesmoke;">
+  <div class="container small border-top">
+    <div class="row py-5 d-flex justify-content-between">
+
+      <div class="col-12 col-lg-6 col-xl-3 border-end p-5">
+        <img
+          style="margin-right: 10px;" width="25px" src="/assets/img/title-logo.png" alt="">
+        <address class="text-secondary mt-3">
+          <a style="text-decoration: none; color: rgba(0, 0, 0, 0.6);" href="https://crococoder.tn/" target="_blank"><strong>Quebec High Schooly</strong></a><br>
+          945 Av. Belvédère,<br>
+          Québec, QC G1S 3G2,<br>
+          Canada<br>
+          <a style="cursor: pointer;font-size: smaller;" (click)="openGoogleMaps()">View Map <img width="15px" src="/assets/svg/external-link.svg" alt=""></a><br>
+          <span style="font-size: small;">+1 418-683-1953</span>
+        </address>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-3 border-end p-5">
+        <h3 class="h6 mb-3">Company</h3>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link link-secondary ps-0" aria-current="page" >Lorem ipsum</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-secondary ps-0" >Dolor sitam est</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-secondary ps-0" >Sed odio cras</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-secondary ps-0" >Commodo tortor ac</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-3 border-end p-5">
+        <h3 class="h6 mb-3">Products</h3>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link link-secondary ps-0" aria-current="page" >Fusce dapibus est</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-secondary ps-0" >Donec sed dui</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-secondary ps-0" >Tortor mauris</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-secondary ps-0" >Ut fermentum massa</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link link-secondary ps-0" >Magna mollis</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-3 p-5">
+        <h3 class="h6 mb-3">Subpages</h3>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link link-secondary ps-0" aria-current="page">404 System Page</a>
+            <a class="nav-link link-secondary ps-0" aria-current="page">Register System Page</a>
+            <a class="nav-link link-secondary ps-0" aria-current="page" routerLink="admin-signup" style="cursor: pointer;text-decoration: underline;" title="{ Key : 'ADMIN' }">Admin Signup Page</a>
+            <a class="nav-link link-secondary ps-0" aria-current="page" routerLink='thanks'><span style="font-weight: bold;">Thank you for your interest, have a nice day</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p style="text-align: center; font-style: italic; font-size: small;color: rgba(0, 0, 0, 0.5);">-Session Mars 2023-<br><span style="cursor: pointer;"title="click to listen" (click)="playMusic()">N 🤍 🤍 B</span></p>
+  <audio #audioPlayer>
+    <source src="/assets/music/battlequeen.mp3" type="audio/mpeg">
+  </audio>
+</footer>

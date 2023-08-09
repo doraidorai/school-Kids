@@ -1,0 +1,14 @@
+<div class="bg">
+    <h2>My Courses</h2>
+    <div class="row">
+        <div class="col-4" *ngFor="let i of assignInfo">
+            <div *ngIf="i.studentsId.includes(user.id)">
+                <div *ngFor="let c of courses">
+                    <div *ngIf="i.courseId == c._id">
+                        <app-student-courses [y]="c" [userId]="user.id"></app-student-courses>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

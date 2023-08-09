@@ -1,0 +1,70 @@
+<div style="background-color:rgba(0, 0, 0, 0.1);">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="row d-flex justify-content-center text-center">
+        <div class="col-lg-8 text-center" data-aos="fade">
+          <p style="margin-top: 5%;" class="text-secondary lead">Let´s start a project together!</p>
+          <h2 class="display-6 mb-5">Hell no! This button is linked to a none working contact form. A none working
+            form without any user feedback. So you might think you done something wrong. But in reality we just
+            don´t want to start anything with you or anyone else.</h2>
+        </div>
+        <div style="margin-bottom: 5%;" class="col-12">
+          <span style="font-family: 'Courier New', Courier, monospace;">Contact </span><img data-bs-toggle="modal"
+            data-bs-target="#exampleModal" style="cursor: pointer;" src="/assets/img/arrow-logo.png" alt="">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="modal fade custom-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="padding-bottom: 50px;padding-left: 50px;padding-right: 50px;">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h3 style="font-weight: bold;margin-bottom: 20px;">Contact Us</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+
+              <address style="font-size: small;" class="text-secondary mt-3">
+                945 Av. Belvédère, Québec,<br>
+                QC G1S 3G2,<br>
+                Canada<br>
+                +1 418-683-1953
+              </address>
+            </div>
+            <div class="col">
+              <form class="example-form">
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Full Name</mat-label>
+                  <input matInput placeholder="Ex. Alice Patrick" value="">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Enter your email</mat-label>
+                  <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                  <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+              
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Leave a comment</mat-label>
+                  <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+                </mat-form-field>
+              </form>
+              <button mat-raised-button color="primary">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+    </div>
+  </div>
+</div>

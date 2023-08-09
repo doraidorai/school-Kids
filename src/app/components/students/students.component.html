@@ -1,0 +1,103 @@
+<div class="bg">
+    <div>
+        <h2 style="font-family: fantasy;">Search Student by Phone</h2>
+        <mat-form-field appearance="fill" style="width: 30%;">
+            <mat-label>Tel Son's</mat-label>
+            <input [(ngModel)]="searchText" type="" matInput placeholder="" value="">
+        </mat-form-field>
+    </div>
+    <div style="font-size: small;" class="container">
+        <div *ngIf="students.length == 0">
+            <div class="text-center" style="color: red;">Nothing to display</div>
+        </div>
+        <div class="row">
+            <div class="col-6" *ngFor="let student of students | filter: searchText"
+                style="background-color:rgba(0, 0, 0, 0.1);padding: 2%;">
+                <div class="row">
+                    <div class="col">
+                        <img style="border-radius: 5px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);" width="200px"
+                            [src]="student.avatar" alt="">
+                    </div>
+                    <div class="col">
+                        <div><span class="course-details">First Name:</span> {{student.firstName}}</div>
+                        <div><span class="course-details">Last Name:</span> {{student.lastName}}</div>
+                        <div><a data-bs-toggle="modal" data-bs-target="#exampleModalViewStudent"
+                                (click)="selectedStudent = student" href="">View details</a></div>
+                        <div><a data-bs-toggle="modal" data-bs-target="#exampleModalViewStudentCourses"
+                                (click)="selectedStudent = student._id" href="">View Courses & Notes</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade View-modal" id="exampleModalViewStudent" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" *ngIf="selectedStudent">
+            <div style="background-image: url(/assets/img/student-view-header.png);" class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" style="margin-left: 10%;">
+                    {{selectedStudent.firstName |
+                    uppercase}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-5">
+                            <img style="border-radius: 5px;" width="200px" [src]="selectedStudent.avatar" alt="">
+                        </div>
+                        <div class="col">
+                            <div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="font-weight: bold;color: gray;">First Name:</span>
+                                    <span>{{selectedStudent.firstName}}</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="font-weight: bold;color: gray;">Last Name:</span>
+                                    <span>{{selectedStudent.lastName}}</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="font-weight: bold;color: gray;">Email:</span>
+                                    <span>{{selectedStudent.email}}</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="font-weight: bold;color: gray;">Tel:</span>
+                                    <span>{{selectedStudent.tel}}</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="font-weight: bold;color: gray;">Address:</span>
+                                    <span>{{selectedStudent.address}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade View-modal-course" id="exampleModalViewStudentCourses" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content" *ngIf="selectedStudent">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Assigned Courses & Notes</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color: rgba(0, 0, 0, 0.1);">
+                <div class="row">
+                    <div class="col-4" *ngFor="let i of assignInfo">
+                        <div *ngIf="i.studentsId.includes(selectedStudent)">
+                            <div *ngFor="let c of courses">
+                                <div *ngIf="i.courseId == c._id">
+                                    <app-student-courses [y]="c" [userId]="selectedStudent"></app-student-courses>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

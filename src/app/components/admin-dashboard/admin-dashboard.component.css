@@ -1,0 +1,102 @@
+::ng-deep .mat-tab-header {
+    border-bottom: none;
+  }
+.dashboard-bg{
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-bottom: 5%;
+}
+h2{
+  font-size: 30px;padding: 2% 0; text-align: center;
+background-color: rgba(0, 0, 0, 0.5);color: white;
+}
+
+table {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+.actions{
+  cursor: pointer;
+}
+.modal-footer {
+  border-top: none;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+.custom-modal .modal-dialog {
+  max-width: 300px;
+}
+
+
+/*btn start*/
+.button-51 {
+  background-color: transparent;
+  border: 1px solid #266DB6;
+  box-sizing: border-box;
+  color: #00132C;
+  font-family: "Avenir Next LT W01 Bold",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  padding: 16px 23px;
+  position: relative;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-51:hover,
+.button-51:active {
+  outline: 0;
+}
+
+.button-51:hover {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button-51:before {
+  background-color: #D5EDF6;
+  content: "";
+  height: calc(100% + 3px);
+  position: absolute;
+  right: -7px;
+  top: -9px;
+  transition: background-color 300ms ease-in;
+  width: 100%;
+  z-index: -1;
+}
+
+.button-51:hover:before {
+  background-color: #6DCFF6;
+}
+
+@media (min-width: 768px) {
+  .button-51 {
+    padding: 16px 32px;
+  }
+}
+/*btn end*/
+.View-modal .modal-dialog {
+  max-width: 600px;
+}
+ .courses {
+  display: inline-block;
+  width: 200px;height: 150px;
+  margin-right: 20px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;border-radius:5px;
+}
+.course-details{
+  color: gray;
+  font-weight: bold;
+  font-size: small;
+}
+p{
+  font-weight: bold;
+  font-size: small;
+}
+.custom-modal-assignedStudents .modal-dialog{
+  max-width: 300px;
+}

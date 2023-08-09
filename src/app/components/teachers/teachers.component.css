@@ -1,0 +1,25 @@
+.products-bg{
+    padding: 5% 15%;
+    }.mat-form-field {
+      font-size: 14px;
+    }
+    h2{
+      font-size: 60px;
+      color: transparent;
+      font-style: italic;
+    -webkit-text-stroke: 1px #000;
+      background: linear-gradient(45deg, #00000000, #00000080, #000000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    mat-grid-tile {
+      background: transparent;border-radius: 5px;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    }
+img{
+  width: 302px;height: 200px;
+  cursor: pointer;
+}
+.View-modal .modal-dialog {
+  max-width: 600px;
+}

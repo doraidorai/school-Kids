@@ -1,0 +1,16 @@
+.modal-footer {
+    border-top: none;
+  }
+  
+  .modal-header {
+    border-bottom: none;
+  }
+  .example-full-width {
+    width: 100%;
+  }
+  .custom-modal .modal-dialog {
+    max-width: 600px;
+  }
+  .mat-form-field {
+    font-size: 14px;
+  }

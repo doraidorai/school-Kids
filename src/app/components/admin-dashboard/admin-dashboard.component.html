@@ -1,0 +1,488 @@
+<div class="dashboard-bg">
+  <h2>Dashboard</h2>
+  <div style="text-align: right;font-size: small;">{{actualDate| date:'short'}}</div>
+
+  <div style="display: flex; margin: 2% 0;font-weight: bold;">
+    <div
+      style="flex: 1; padding: 5%; background-image: url(/assets/img/totalteachers.png); background-position: center;background-repeat: no-repeat;background-size: cover; margin-right: 10%;">
+      <span style="color: rgba(255, 255, 255, 0.8); margin-left: 20px;">Total Teachers:</span><span
+        style="color: white; margin-left: 10px; font-size: large;">{{teachers.length}}</span>
+    </div>
+    <div style="flex: 1; padding: 5%; background-color: rgba(255, 143, 221, 0.5); margin-right: 10%;">Total
+      Students:<span style="font-size:large; margin-left: 10px;">{{students.length}}</span></div>
+    <button routerLink="/add-event" style="flex: 1; padding: 5%;" class="button-51" role="button">Add Event</button>
+  </div>
+
+
+  <mat-tab-group mat-align-tabs="center">
+    <!------------------------------------Content 1 Start-------------------------------------->
+    <mat-tab label="Teachers">
+      <table class="table table-bordered table-hover" style="margin-top: 3%; text-align: center;">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Speciality</th>
+            <th scope="col">Details</th>
+            <th scope="col">Status</th>
+            <th scope="col">Confirm</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="teachers.length == 0">
+            <td colspan="8" class="text-center" style="color: red;">Nothing to display</td>
+          </tr>
+          <tr *ngFor=" let teacher of teachers ; let i = index">
+            <th>{{ i + 1 }}</th>
+            <th>{{teacher.firstName}}</th>
+            <td>{{teacher.tel}}</td>
+            <td>{{teacher.speciality}}</td>
+            <td>
+              <img class="actions" width="25px" src="/assets/svg/file-view.svg" data-bs-toggle="modal"
+                data-bs-target="#exampleModalViewTeacher" (click)="selectedTeacher = teacher">
+            </td>
+            <td [ngStyle]="{'color': statusColor(teacher.status)}">{{teacher.status}}</td>
+            <td>
+              <img *ngIf="teacher.status =='notOk'" (click)="acceptTeacher(teacher)" class="actions" width="25px"
+                src="/assets/svg/accept.svg">
+              <span *ngIf="teacher.status == 'ok'">-</span>
+            </td>
+            <td> <img class="actions" width="25px" src="/assets/svg/delete-191.svg" data-bs-toggle="modal"
+                data-bs-target="#exampleModalDeleteTeacher" (click)="deletedTeacher = teacher._id">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+    <!------------------------------------Content 1 End-------------------------------------->
+
+
+
+
+
+    <!------------------------------------Content 2 Start-------------------------------------->
+    <mat-tab label="Students">
+      <table style="margin-top: 3%;text-align: center;" class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Details</th>
+            <!-- <th scope="col">Assign Courses</th> -->
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="students.length == 0">
+            <td colspan="6" class="text-center" style="color: red;">Nothing to display</td>
+          </tr>
+          <tr *ngFor=" let student of students ; let i = index">
+            <th>{{ i + 1 }}</th>
+            <th>{{student.firstName}}</th>
+            <td>{{student.tel}}</td>
+            <td>
+              <img class="actions" width="25px" src="/assets/svg/file-view.svg" data-bs-toggle="modal"
+                data-bs-target="#exampleModalViewStudent" (click)="selectedStudent = student">
+            </td>
+            <!-- <td>
+              courses List
+            </td> -->
+            <td> <img class="actions" width="25px" src="/assets/svg/delete-191.svg" data-bs-toggle="modal"
+                data-bs-target="#exampleModalDeleteStudent" (click)="deletedStudent = student._id">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+    <!------------------------------------Content 2 End-------------------------------------->
+
+
+
+
+
+    <!------------------------------------Content 3 Start-------------------------------------->
+    <mat-tab label="Parents">
+      <table style="margin-top: 3%;text-align: center;" class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Details</th>
+            <!-- <th scope="col">Sons</th> -->
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="parents.length == 0">
+            <td colspan="5" class="text-center" style="color: red;">Nothing to display</td>
+          </tr>
+          <tr *ngFor=" let parent of parents ; let i = index">
+            <th>{{ i + 1 }}</th>
+            <th>{{parent.firstName}}</th>
+            <td>{{parent.tel}}</td>
+            <td>
+              <img class="actions" width="25px" src="/assets/svg/file-view.svg" data-bs-toggle="modal"
+                data-bs-target="#exampleModalViewParent" (click)="selectedParent = parent">
+            </td>
+            <!-- <td>
+              <span *ngFor="let student of students">
+                <ng-container *ngIf="student.tel == parent.telSon">
+                  {{student.firstName}}
+                  <br/>
+                </ng-container>
+              </span>
+            </td> -->
+            <td> <img class="actions" width="25px" src="/assets/svg/delete-191.svg" data-bs-toggle="modal"
+                data-bs-target="#exampleModalDeleteParent" (click)="deletedParent = parent._id">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+    <!------------------------------------Content 3 End-------------------------------------->
+  </mat-tab-group>
+
+
+
+  <h5 style="margin: 5% 0; font-weight: bold; color: gray;">List of Teachers & Courses <br>
+    <p style="font-weight: lighter;">You can Assign Courses for each Student</p>
+  </h5>
+
+  <div style="background-color: rgba(0, 0, 0, 0.1);" class="row" *ngFor="let teacher of teachers">
+    <div style="margin-bottom: 2%; font-weight: bold;background-color: gray;padding: 1%; color: white;">
+      {{teacher.firstName |
+      uppercase}}</div>
+
+    <div class="col-3" *ngFor="let course of courses">
+      <div *ngIf="teacher._id == course.teacherId">
+        <img data-bs-toggle="modal" (click)="selectedCourse = course" data-bs-target="#exampleModalAssignedStudents"
+          class="courses" [src]="course.img" alt="Image 1">
+        <p style="margin-top: 5%;"><span class="course-details">Title:</span> {{course.name}}<br><span
+            class="course-details">Duration:</span>
+          {{course.duration}} <span class="course-details">Month(s)</span><br><span
+            class="course-details">Description:</span> {{course.description}}</p>
+        <mat-expansion-panel #panel style="width: 200px;margin-bottom: 5%;">
+          <mat-expansion-panel-header>
+            Assign Students
+          </mat-expansion-panel-header>
+          <mat-form-field style="width: 150px;">
+            <mat-label>Students List</mat-label>
+            <mat-select multiple [(ngModel)]="selectedStudentsId">
+              <mat-option *ngFor="let student of students" [value]="student._id">{{student.firstName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button (click)="applySelectedStudents(course._id) ;  panel.close()" mat-raised-button
+            color="primary">Apply</button>
+        </mat-expansion-panel>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+</div>
+
+<!--ModalAssignedStudents Start-->
+<div class="modal fade custom-modal-assignedStudents" id="exampleModalAssignedStudents" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" *ngIf="selectedCourse">
+      <div class="modal-header" style="background-color: rgba(137, 43, 226, 0.5);color: white;">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">List Assigned Students</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="container" style="height: 300px;overflow-y: auto;">
+              <div *ngFor="let i of assignInfo">
+                <div *ngIf="i.courseId == selectedCourse._id">
+                  <div *ngFor="let student of students">
+                    <div *ngIf="i.studentsId.includes(student._id)">
+                      <div class="row" style="margin-bottom: 5px;">
+                        <div class="col-4">
+                          <img [src]="student.avatar" width="70px" alt="">
+                        </div>
+                        <div style="font-size: small;" class="col">
+                          {{student.firstName}}<br>{{student.lastName}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--ModalAssignedStudents End-->
+
+
+
+
+
+
+<!--DELETE Modal -->
+<div class="modal fade custom-modal" id="exampleModalDeleteTeacher" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>Are you sure you want to delete this permanently?</div>
+        <div style="font-size: small; font-style: italic;">*This action can't be Undo</div>
+      </div>
+      <div class="modal-footer justify-content-center">
+
+        <button (click)="deleteTeacher(deletedTeacher)" mat-raised-button color="warn"
+          data-bs-dismiss="modal">Delete</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade custom-modal" id="exampleModalDeleteStudent" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>Are you sure you want to delete this permanently?</div>
+        <div style="font-size: small; font-style: italic;">*This action can't be Undo</div>
+      </div>
+      <div class="modal-footer justify-content-center">
+
+        <button (click)="deleteStudent(deletedStudent)" mat-raised-button color="warn"
+          data-bs-dismiss="modal">Delete</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade custom-modal" id="exampleModalDeleteParent" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>Are you sure you want to delete this permanently?</div>
+        <div style="font-size: small; font-style: italic;">*This action can't be Undo</div>
+      </div>
+      <div class="modal-footer justify-content-center">
+
+        <button (click)="deleteParent(deletedParent)" mat-raised-button color="warn"
+          data-bs-dismiss="modal">Delete</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--VIEW Modal-->
+<div class="modal fade View-modal" id="exampleModalViewTeacher" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" *ngIf="selectedTeacher">
+      <div style="background-image: url(/assets/img/teacher-view-header.png);" class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="margin-left: 10%;">{{selectedTeacher.firstName |
+          uppercase}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <img style="border-radius: 5px;" width="200px" [src]="selectedTeacher.avatar" alt="">
+            </div>
+            <div class="col">
+              <div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">First Name:</span>
+                  <span>{{selectedTeacher.firstName}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Last Name:</span>
+                  <span>{{selectedTeacher.lastName}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Email:</span>
+                  <span>{{selectedTeacher.email}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Tel:</span>
+                  <span>{{selectedTeacher.tel}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Address:</span>
+                  <span>{{selectedTeacher.address}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Speciality:</span>
+                  <span>{{selectedTeacher.speciality}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">CV:</span>
+                  <span style="font-size: small;"><a *ngIf="selectedTeacher.cv" [href]="selectedTeacher.cv"
+                      target="_blank">View CV</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade View-modal" id="exampleModalViewStudent" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" *ngIf="selectedStudent">
+      <div style="background-image: url(/assets/img/student-view-header.png);" class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="margin-left: 10%;">{{selectedStudent.firstName |
+          uppercase}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <img style="border-radius: 5px;" width="200px" [src]="selectedStudent.avatar" alt="">
+            </div>
+            <div class="col">
+              <div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">First Name:</span>
+                  <span>{{selectedStudent.firstName}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Last Name:</span>
+                  <span>{{selectedStudent.lastName}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Email:</span>
+                  <span>{{selectedStudent.email}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Tel:</span>
+                  <span>{{selectedStudent.tel}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Address:</span>
+                  <span>{{selectedStudent.address}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade View-modal" id="exampleModalViewParent" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" *ngIf="selectedParent">
+      <div style="background-image: url(/assets/img/parent-view-header.png);" class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="margin-left: 10%;">{{selectedParent.firstName |
+          uppercase}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <img style="border-radius: 5px;" width="200px" [src]="selectedParent.avatar || '/assets/img/parent-avatar.png'"  alt="">
+            </div>
+            <div class="col">
+              <div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">First Name:</span>
+                  <span>{{selectedParent.firstName}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Last Name:</span>
+                  <span>{{selectedParent.lastName}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Email:</span>
+                  <span>{{selectedParent.email}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Tel:</span>
+                  <span>{{selectedParent.tel}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">TelSon:</span>
+                  <span>{{selectedParent.telSon}}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-weight: bold;color: gray;">Address:</span>
+                  <span>{{selectedParent.address}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!--EDIT Modal-->
+<!-- <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!--
+  <td>
+              <img class="actions" width="25px" src="/assets/svg/file-view.svg" data-bs-toggle="modal"
+                data-bs-target="#exampleModalView">
+              <img class="actions" width="25px" src="/assets/svg/edit-article.svg" data-bs-toggle="modal"
+                data-bs-target="#exampleModalEdit">
+              <img class="actions" width="25px" src="/assets/svg/delete-191.svg" data-bs-toggle="modal"
+                data-bs-target="#exampleModalDelete">
+            </td>
+-->

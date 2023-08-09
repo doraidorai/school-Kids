@@ -1,0 +1,335 @@
+<div style="margin-bottom: 64px;"><!--don't change this value-->
+  <mat-toolbar class="navbar">
+    <div>
+      <span routerLink="home" class="title" (click)="playMusic()" title="click to listen"><img
+          style="margin-right: 10px;" width="40px" src="/assets/img/title-logo.png" alt="">Quebec High School</span>
+      <audio #audioPlayer>
+        <source src="assets/music/WheretheVikingsdreamSecretVikingKingdom.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <div>
+      <span routerLink="courses">Courses</span>
+      <span *ngIf="!user" routerLink="teacher-signup-v2">Join Us</span>
+      <span routerLink="about">About</span>
+      <span routerLink="contact">Contact</span>
+
+
+      <span *ngIf="!user" style="cursor: pointer;" data-bs-target="#exampleModalToggle"
+        data-bs-toggle="modal">Login</span>
+      <span *ngIf="user" [matMenuTriggerFor]="menu"><img style="border-radius: 50%;" width="40px" [src]="user.avatar"
+          alt=""> {{user.firstName}} <img width="25px" src="/assets/svg/arrow-down-svgrepo-com.svg" alt=""></span>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button *ngIf="user?.role !== 'admin'" routerLink="profile" mat-menu-item>Profile</button>
+        <button *ngIf="user?.role == 'admin'" routerLink="admin-dashboard" mat-menu-item>Dashboard</button>
+        <button *ngIf="user?.role == 'teacher'" routerLink="teacher-dashboard" mat-menu-item>Dashboard</button>
+        <button *ngIf="user?.role == 'student'" routerLink="student-dashboard" mat-menu-item>Dashboard</button>
+        <button *ngIf="user?.role == 'parent'" routerLink="students" mat-menu-item>Students</button>
+        <button *ngIf="user" (click)="logout()" mat-menu-item>Logout <img width="20px" src="/assets/svg/logout-27.svg"
+            alt=""></button>
+      </mat-menu>
+    </div>
+    <!-- <div>
+      <input class="search" placeholder="Search Course" type="text"><img width="25px" src="assets/svg/search-185.svg"
+        style="cursor: pointer;">
+    </div> -->
+  </mat-toolbar>
+</div>
+
+
+
+<div class="modal fade custom-modal" id="exampleModalToggle" aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-top">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Login</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="loginForm" class="example-form">
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Phone number</mat-label>
+            <input formControlName="tel" type="tel" matInput placeholder="" value="">
+            <mat-error *ngIf="loginForm.controls['tel'].invalid && (loginForm.controls['tel'].touched)">
+              <div class="errorMessage" *ngIf="loginForm.controls['tel'].errors.required">Phone is
+                Required</div>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Enter password</mat-label>
+            <input formControlName="pwd" matInput [type]="hide ? 'password' : 'text'">
+            <mat-error *ngIf="loginForm.controls['pwd'].invalid && (loginForm.controls['pwd'].touched)">
+              <div class="errorMessage" *ngIf="loginForm.controls['pwd'].errors.required">Password is
+                Required</div>
+            </mat-error>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
+
+        <p style="font-size: 12px;text-align: right;"><a routerLink="error">Forgot password?</a></p>
+
+        <div style="text-align: center;"><button (click)="login()" [disabled]="loginForm.invalid" mat-raised-button
+            color="primary">Login</button></div>
+
+      </div>
+
+      <div style="background-color: pink;" class="modal-footer justify-content-center">
+
+        <div style="font-size: small;text-align: center;">Not a member yet? <a style="font-style: italic;"
+            data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" href="">Register!</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade custom-modal2" id="exampleModalToggle2" aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-top modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header" style="background-image: url(assets/img/signup-header.png);">
+
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Signup</h1>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!--MODAL-BODY-1-->
+      <div class="modal-body" id="modalBody1"
+        style="padding-bottom: 50px;padding-left: 50px;padding-right: 50px;border-bottom-right-radius: 0.5rem; border-bottom-left-radius: 0.5rem;">
+
+        <div style="text-align: center;margin-bottom: 5%;">
+          <span title="normal user" style="cursor: default; font-weight: bold;color: black;">Student</span>
+          <img title="click to switch" style="cursor: pointer;" width="25px" src="/assets/svg/right-12.svg" alt=""
+            (click)="switchModalBody()">
+          <span title="who wanna invest with Us"
+            style="cursor: default; font-weight: bold;color: rgba(0, 0, 0, 0.3);">Parent</span>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <form [formGroup]="signupStudentForm" class="example-form">
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>First Name</mat-label>
+                  <input formControlName="firstName" type="text" matInput placeholder="" value="">
+                  <mat-error
+                    *ngIf="signupStudentForm.controls['firstName'].invalid && (signupStudentForm.controls['firstName'].touched)">
+                    <div class="errorMessage" *ngIf="signupStudentForm.controls['firstName'].errors.required">First name
+                      is
+                      Required</div>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Last Name</mat-label>
+                  <input formControlName="lastName" type="text" matInput placeholder="" value="">
+                  <mat-error
+                    *ngIf="signupStudentForm.controls['lastName'].invalid && (signupStudentForm.controls['lastName'].touched)">
+                    <div class="errorMessage" *ngIf="signupStudentForm.controls['lastName'].errors.required">Last name
+                      is
+                      Required</div>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Email</mat-label>
+                  <input formControlName="email" type="email" matInput placeholder="" value="">
+                  <mat-error
+                    *ngIf="signupStudentForm.controls['email'].invalid && (signupStudentForm.controls['email'].touched || signupStudentForm.controls['email'].dirty)">
+                    <div class="errorMessage" *ngIf="signupStudentForm.controls['email'].errors.required">email is
+                      Required</div>
+                    <div class="errorMessage" *ngIf="signupStudentForm.controls['email'].errors.email">invalid email
+                      format</div>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Phone number</mat-label>
+                  <input formControlName="tel" type="tel" matInput placeholder="" value="">
+                  <mat-error
+                    *ngIf="signupStudentForm.controls['tel'].invalid && (signupStudentForm.controls['tel'].touched || signupStudentForm.controls['tel'].dirty)">
+                    <div class="errorMessage" *ngIf="signupStudentForm.controls['tel'].errors.required">Phone is
+                      Required</div>
+                    <div class="errorMessage" *ngIf="signupStudentForm.controls['tel'].errors.minlength">Phone at least
+                      8
+                      ch.</div>
+                  </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Address</mat-label>
+                  <input formControlName="address" type="text" matInput placeholder="" value="">
+                  <mat-error
+                    *ngIf="signupStudentForm.controls['address'].invalid && (signupStudentForm.controls['address'].touched)">
+                    <div class="errorMessage" *ngIf="signupStudentForm.controls['address'].errors.required">Address is
+                      Required</div>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Enter password</mat-label>
+                  <input formControlName="pwd" matInput [type]="hide ? 'password' : 'text'">
+                  <mat-error
+                    *ngIf="signupStudentForm.controls['pwd'].invalid && (signupStudentForm.controls['pwd'].touched || signupStudentForm.controls['pwd'].dirty)">
+                    <div class="errorMessage" *ngIf="signupStudentForm.controls['pwd'].errors.required">Password is
+                      Required</div>
+                    <div class="errorMessage" *ngIf="signupStudentForm.controls['pwd'].errors.minlength">Password at
+                      least 6
+                      ch.</div>
+                  </mat-error>
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+
+                <div (click)="filePicker.click()"
+                  style="font-size: small;margin-bottom: 2%;margin-top: 2%; cursor: pointer;color: rgba(0, 0, 0, 0.7);">
+                  <img src="/assets/svg/profile-upload.svg" width="25px" alt=""> Upload picture (optional)</div>
+                <div style="margin-bottom: 5%;"> <img [src]="imagePreview" alt="" width="100px"></div>
+              </form>
+
+              <button (click)="signupStudent()" [disabled]="signupStudentForm.invalid" mat-raised-button
+                color="primary">Signup</button>
+            </div>
+            <div class="col">
+              <h3 style="font-weight: bold;margin-bottom: 20px;">Welcome!</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam.</p>
+
+
+
+              <div style="visibility: hidden;">
+                <input type="file" class="form-control" #filePicker (change)="onImageSelected($event)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--MODAL-BODY-2-->
+      <div class="modal-body" id="modalBody2"
+        style="display: none;padding-bottom: 50px;padding-left: 50px;padding-right: 50px;border-bottom-right-radius: 0.5rem; border-bottom-left-radius: 0.5rem;">
+
+        <div style="text-align: center;margin-bottom: 5%;">
+          <span title="normal user" style="cursor: default; font-weight: bold;color: rgba(0, 0, 0, 0.3);">Student</span>
+          <img title="click to switch" style="cursor: pointer;" width="25px" src="/assets/svg/left-13.svg" alt=""
+            (click)="switchModalBody()">
+          <span title="who wanna invest with Us" style="cursor: default; font-weight: bold;color: black;">Parent</span>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h3 style="font-weight: bold;margin-bottom: 20px;">Welcome to Parent Signup!</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam.</p>
+              <address style="font-size: small;" class="text-secondary mt-3">
+                For more details:<br>
+                +1 418-683-1953
+              </address>
+            </div>
+            <div class="col">
+              <form [formGroup]="signupParentForm" class="example-form">
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>First Name</mat-label>
+                  <input formControlName="firstName" type="text" matInput placeholder="" value="">
+                  <mat-error
+                    *ngIf="signupParentForm.controls['firstName'].invalid && (signupParentForm.controls['firstName'].touched)">
+                    <div class="errorMessage" *ngIf="signupParentForm.controls['firstName'].errors.required">First name
+                      is
+                      Required</div>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Last Name</mat-label>
+                  <input formControlName="lastName" type="text" matInput placeholder="" value="">
+                  <mat-error
+                    *ngIf="signupParentForm.controls['lastName'].invalid && (signupParentForm.controls['lastName'].touched)">
+                    <div class="errorMessage" *ngIf="signupParentForm.controls['lastName'].errors.required">Last name is
+                      Required</div>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Email</mat-label>
+                  <input formControlName="email" type="email" matInput placeholder="" value="">
+                  <mat-error
+                    *ngIf="signupParentForm.controls['email'].invalid && (signupParentForm.controls['email'].touched || signupParentForm.controls['email'].dirty)">
+                    <div class="errorMessage" *ngIf="signupParentForm.controls['email'].errors.required">email is
+                      Required</div>
+                    <div class="errorMessage" *ngIf="signupParentForm.controls['email'].errors.email">invalid email
+                      format</div>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Phone number</mat-label>
+                  <input formControlName="tel" type="tel" matInput placeholder="" value="">
+                  <mat-error
+                    *ngIf="signupParentForm.controls['tel'].invalid && (signupParentForm.controls['tel'].touched || signupParentForm.controls['tel'].dirty)">
+                    <div class="errorMessage" *ngIf="signupParentForm.controls['tel'].errors.required">Phone is
+                      Required</div>
+                    <div class="errorMessage" *ngIf="signupParentForm.controls['tel'].errors.minlength">Phone at least 8
+                      ch.</div>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Son's Phone number</mat-label>
+                  <input formControlName="telSon" type="tel" matInput placeholder="" value="">
+                  <mat-error
+                    *ngIf="signupParentForm.controls['telSon'].invalid && (signupParentForm.controls['telSon'].touched)">
+                    <div class="errorMessage" *ngIf="signupParentForm.controls['telSon'].errors.required">Son's Phone is
+                      Required</div>
+                  </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Address</mat-label>
+                  <input formControlName="address" type="text" matInput placeholder="" value="">
+                  <mat-error
+                    *ngIf="signupParentForm.controls['address'].invalid && (signupParentForm.controls['address'].touched)">
+                    <div class="errorMessage" *ngIf="signupParentForm.controls['address'].errors.required">Address is
+                      Required</div>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Enter password</mat-label>
+                  <input formControlName="pwd" matInput [type]="hide ? 'password' : 'text'">
+                  <mat-error
+                    *ngIf="signupParentForm.controls['pwd'].invalid && (signupParentForm.controls['pwd'].touched || signupParentForm.controls['pwd'].dirty)">
+                    <div class="errorMessage" *ngIf="signupParentForm.controls['pwd'].errors.required">Password is
+                      Required</div>
+                    <div class="errorMessage" *ngIf="signupParentForm.controls['pwd'].errors.minlength">Password at
+                      least 6
+                      ch.</div>
+                  </mat-error>
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+
+
+
+
+                <!--CV import-->
+              </form>
+
+              <button style="margin-top: 2%;" (click)="signupParent()" [disabled]="signupParentForm.invalid"
+                mat-raised-button color="primary">Signup</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- <div class="modal-footer justify-content-center">
+
+        <button mat-raised-button color="primary">Signup</button>
+      </div> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="products-bg">
+  <h2>Our Courses</h2>
+  <div class="image-container">
+    <div *ngFor="let course of courses">
+      <img [src]="course.img" alt="Image 1">
+      <p><span>Title:</span> {{course.name}}<br><span>Duration:</span> {{course.duration}} <span>month(s)</span>
+      <br><span>Description:</span> {{course.description}}</p>
+    </div>
+  </div>
+</div>

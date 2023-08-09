@@ -1,0 +1,71 @@
+<div class="profile-bg">
+    <div class="row align-items-start">
+        <div class="col-4 avatar">
+            <h5 style="color:sienna">{{user.firstName}} {{user.lastName}}</h5>
+            <p>{{user.role}}</p>
+            <div style="margin: 5% 0;">
+                <img style="border-radius: 50%;" width="200px" [src]="imagePreview || user.avatar" alt="">
+            </div>
+            <div (click)="filePicker.click()" style="font-size: small;cursor: pointer;color: rgba(0, 0, 0, 0.7);">
+                <img src="/assets/svg/profile-upload.svg" width="25px" alt=""> Upload picture (optional)
+            </div>
+            <input style="display: none;" type="file" class="form-control" #filePicker
+                (change)="onImageSelected($event)">
+        </div>
+        <div class="col info">
+            <div style="text-align: center;font-size: small;padding: 0 30%;">
+                <p>{{user.about}}</p>
+            </div>
+            <form [formGroup]="profileForm" class="example-form">
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>{{user.firstName}}</mat-label>
+                    <input formControlName="firstName" [(ngModel)]="fName" type="text" matInput placeholder="" value="">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>{{user.lastName}}</mat-label>
+                    <input formControlName="lastName" [(ngModel)]="lName" type="text" matInput placeholder="" value="">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>{{user.email}}</mat-label>
+                    <input formControlName="email" [(ngModel)]="email" type="email" matInput placeholder="" value="">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>{{user.tel}}</mat-label>
+                    <input formControlName="tel" [(ngModel)]="tel" type="tel" matInput placeholder="" value="">
+                    <mat-error
+                    *ngIf="profileForm.controls['tel'].invalid && (profileForm.controls['tel'].dirty)"><span  
+                        *ngIf="profileForm.controls['tel'].errors.minlength">Phone at least 8
+                        ch.</span></mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>{{user.address}}</mat-label>
+                    <input formControlName="address" [(ngModel)]="address" type="text" matInput placeholder="" value="">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Enter new password</mat-label>
+                    <input formControlName="pwd" [(ngModel)]="pwd" matInput [type]="hide ? 'password' : 'text'">
+                    <mat-error
+                        *ngIf="profileForm.controls['pwd'].invalid && (profileForm.controls['pwd'].dirty)">
+                        <div *ngIf="profileForm.controls['pwd'].errors.minlength">Password at least 6
+                            ch.</div>
+                    </mat-error>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>About yourself</mat-label>
+                    <textarea formControlName="about" [(ngModel)]="about" matInput placeholder="Ex. It makes me feel..."></textarea>
+                </mat-form-field>
+            </form>
+            <div style="text-align: left;">
+                <button (click)="profileUpdate()" [disabled]="profileForm.invalid || !about && !tel && !pwd && !fName && !lName && !email && !address && !isImageSelected" mat-raised-button
+                    color="primary">Save changes</button>
+            </div>
+            <div style="margin-top: 5%; color: gray;font-size: 12px;">
+                <p>*Changes will take effect after next Login.</p>
+            </div>
+        </div>
+    </div>
+</div>
